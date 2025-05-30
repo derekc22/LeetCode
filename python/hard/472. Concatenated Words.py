@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
 
     def pp(r, m):
-        print(r,m,"*")
+        # print(r,m,"*")
         if r < 4:
             return [r]
         else:
@@ -72,7 +72,7 @@ if __name__ == '__main__':
 
 
         k = n-1 if n%2 == 0 else n-2
-        print(n,m,k,"!")
+        # print(n,m,k,"!")
         # return [ f"{n-r}+{ pp(r, r-(n-r)) }" for r in range(m, k)]
         # return [ [n-r] + pp(r, r-(n-r)) for r in range(m, k) ]
 
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     def p(n):
 
-        print(n)
+        # print(n)
 
         if n == 1:
             return []
@@ -94,9 +94,9 @@ if __name__ == '__main__':
         else:
             return [i+"+1" for i in p(n-1) + [f"{n-1}"]] + pn(n, 2)
 
-    num = 8
-    max_val = 3
-    print(pn(10, 7))
+    # num = 8
+    # max_val = 3
+    # print(pn(10, 7))
     # print(pp(1, -2))
 
 
@@ -107,5 +107,5 @@ if __name__ == '__main__':
         
         
 
-    # partitions(5)
+    print(len(p(10)))
 

@@ -1,0 +1,8 @@
+{
+    "workbench.colorTheme": "Minone",
+    "files.associations": {
+        "iosfwd": "cpp",
+        "vector": "cpp",
+        "map": "cpp"
+    }
+}
