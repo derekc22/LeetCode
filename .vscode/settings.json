@@ -1,8 +1,10 @@
 {
-    "workbench.colorTheme": "Minone",
+    "workbench.colorTheme": "Anysphere Dark Theme",
     "files.associations": {
         "iosfwd": "cpp",
         "vector": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "tuple": "cpp",
+        "ostream": "cpp"
     }
 }
