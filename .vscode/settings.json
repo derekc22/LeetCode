@@ -5,6 +5,14 @@
         "vector": "cpp",
         "map": "cpp",
         "tuple": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "set": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp"
     }
 }

@@ -12,16 +12,20 @@ public:
         map<int, int> numMap;
 
         for (int i=0; i < nums.size(); i++){
+            // Visit each number in the array
 
             int curr = nums[i];
             int need = target - curr;
+            // Calculate the number needed to reach the target
 
             if ( numMap.find(need) != numMap.end() ){
                 vector<int>  sol = {i, numMap[need]};
                 return sol;
+                // If the number needed is found in the hash table, return the indices of both numbers
 
             } else {
                 numMap.insert({curr, i});
+                // Otherwise, insert the current number and its index into the hash table
             }
         }
 
@@ -29,6 +33,7 @@ public:
         
     }
 };
+// https://www.youtube.com/watch?v=KLlXCFG5TnA
 
 // In this solution, each number is visited. The number needed to reach the target calculated and then checked for in the hash map
 // If the number is found, the indices of both the current number and the needed number are returned
