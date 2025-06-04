@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 // https://chatgpt.com/c/683bd18b-f53c-8000-803d-b81bb1721e72
 
 using std::string;
@@ -70,26 +69,3 @@ public:
 
 
 
-int main(){
-
-    Solution sol;
-
-    // string s = "ccc";
-    // string s = "xbby";
-    // string s = "aaaa";
-    // string pal = sol.longestPalindrome(s);
-    // cout << "longest palindrome: " << pal << endl;
-    
-
-    string ss[] = {"traxradarblin", "zupmadamdeifiedlox", "grindreferrotorsap", 
-        "noobnooncivicdrop", "fleekpeepdeedbang", "laxstatsrevivertru", 
-        "moklevelmadamspur", "vexttenetnoonplex", "glarddeedpeepmadamtox", 
-        "zortredderrotorglim", "braxwowcivicstatslin", "jupdeifiedmoxklem", 
-        "vulkreviverreferdeedquab", "nockmadamwowzonk", "cleepeepcivicnoontrak"};
-    for (string s : ss){
-        string pal = sol.longestPalindrome(s);
-        cout << "longest palindrome " << pal << endl;
-    }
-
-    return 0;
-}
