@@ -21,12 +21,8 @@ public:
             } else {
                 isPal = false;
             }
-
-
         }
-
-        return isPal;
-        
+        return isPal;   
     }
 };
 
