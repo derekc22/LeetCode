@@ -17,6 +17,13 @@ public:
 
     bool isPalindrome(string s) {
 
+        /** 
+         * This algorithm checks if a given string is a palindrome
+         * This is a classic two-pointer problem as the structure of a palindrome is such that the first and last characters must match, no matter how many characters are in between
+         * Thus, if any pair of characters at the two pointers do not match, the string is automatically not a palindrome 
+        */
+    
+
         s = formatString(s);
         cout << s << endl;
 
