@@ -9,6 +9,16 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
 
+        /**
+            https://www.youtube.com/watch?v=KLlXCFG5TnA
+            In this solution, each number is visited. The number needed to reach the target calculated and then checked for in the hash map
+            If the number is found, the indices of both the current number and the needed number are returned
+            If the number is not found, the current number (key) and its index (value) are inserted into the hash map 
+            The time complexity is O(n) - we only traverse the array once
+            The space complexity is O(n) - we store the numbers in a hash map
+            The access time for the hash map is O(1) on average
+        */
+
         map<int, int> numMap;
 
         for (int i=0; i < nums.size(); i++){
@@ -33,14 +43,8 @@ public:
         
     }
 };
-// https://www.youtube.com/watch?v=KLlXCFG5TnA
 
-// In this solution, each number is visited. The number needed to reach the target calculated and then checked for in the hash map
-// If the number is found, the indices of both the current number and the needed number are returned
-// If the number is not found, the current number (key) and its index (value) are inserted into the hash map 
-// The time complexity is O(n) - we only traverse the array once
-// The space complexity is O(n) - we store the numbers in a hash map
-// The access time for the hash map is O(1) on average
+
 
 int main(){
     vector<int> arr = {3, 3};

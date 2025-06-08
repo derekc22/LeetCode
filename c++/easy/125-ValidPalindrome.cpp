@@ -1,10 +1,9 @@
 #include <iostream>
-#include <cctype>
 using std::string, std::cout, std::endl;
-
 
 class Solution {
 public:
+
     std::string formatString(const std::string& input) {
         std::string result;
         for (char ch : input) {
@@ -14,7 +13,7 @@ public:
         }
         return result;
     }
-
+    
     bool isPalindrome(string s) {
 
         /** 

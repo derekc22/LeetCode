@@ -9,6 +9,12 @@ class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
 
+        /**
+            My original attempt at '128-LongestConsecutiveSequence'
+            Uses a recursive approach that is more complex, less efficient, and more fragile than the set and map solutions
+            Do not use this. It is simply left here for future reference
+        */
+
         std::map< int, vector<int> > numMap;
 
         for (const auto& num : nums){

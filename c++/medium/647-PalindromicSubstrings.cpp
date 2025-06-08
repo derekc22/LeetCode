@@ -1,13 +1,19 @@
 #include <iostream>
 #include <string>
-// https://chatgpt.com/c/683bd18b-f53c-8000-803d-b81bb1721e72
+
 
 using std::string;
 using std::cout, std::endl;
 
 class Solution {
 public:
-    int longestPalindrome(string s) {
+    int countSubstrings(string s) {
+
+        /**
+            This is literally just '5-LongestPalindromicSubstring.cpp' but instead of returning the longest palindromic substring, we return the number of palindromic substrings
+            We do this by simply incrementing a counter every time we find a palindromic substring (which occurs every time the left and right bounds of the current substring match)
+            See '5-LongestPalindromicSubstring.cpp' for more information
+         */
 
 
         int iOdd; // left bound
@@ -56,10 +62,7 @@ public:
 
                     } 
                 }
-                
-
             }
-        
         }
 
         return nPalindromes;
