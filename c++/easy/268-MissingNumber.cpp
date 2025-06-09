@@ -15,7 +15,6 @@ public:
 
         int n = nums.size();
         int sum = 0;
-        int trueSum = 0;
         int missingNum;
 
         for (int num:nums){
