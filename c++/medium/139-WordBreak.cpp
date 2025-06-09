@@ -104,7 +104,7 @@ public:
             Each index in the boolean array represents whether the substring from the start of the string to that index can be segmented into words from the dictionary
             Its too complex to explain here, but the video above does a good job of explaining it
             Two key differences from the video and my approach are:
-            
+
             1) The video uses a boolean array of size s.length() + 1, while I use a boolean array of size s.length()
             According th ChatGPT, my approach is still valid and achieves the same result as the video:
             " Your implementation works without the extra DP element because it manually accounts for the empty prefix
@@ -122,10 +122,12 @@ public:
             The guy introduces this concept at 12:34 (https://youtu.be/hK6Git1o42c?t=754) for the very last element in the dp array, but it is actually a key part of the algorithm that must be applied to all substrings that are found in the dictionary
             The only exception is for substrings that start at the beginning of the string, as there is no previous substring to check
             THis particular logic is handled by the line 'if ( checkLen < 0 || ( checkLen >= 0 && dp[checkLen] ) )' in the code below
-            The variable checkLen is defined as the current index (i) minus the length of the found substring (currSubstr.length()), which gives the index of the previous substring in the string (if it exists)
-            The if statement checks if the index of the previous substring is less than 0 (meaning that the currently found word starts at the beginning of the string) 
-            If so, it proceeds without a previous substring check (as there is no previous substring to check)
-            However, if the index of the previous substring is greater than or equal to 0 (meaning that the currently found word does not start at the beginning of the string, ie there exists a substring before it), it checks if that previous substring can ALSO be segmented (by checking the value of dp[checkLen])
+            The variable 'checkLen' is defined as the current index (i) minus the length of the current found substring (currSubstr.length())
+            This gives the ending index of the previous substring just prior to the current found substring
+            The if statement then checks if 'checkLen' is less than 0 (checkLen < 0)
+            If so, this means that the current found substring starts at the beginning of the string. Thus, there is no previous substring to check in this case, so it simply proceeds without doing a dp array check
+            Note that this is the exact logic that the video uses an extra element in the dp array to handle
+            Anyway, if, alternatively, the index of the previous substring is greater than or equal to 0 (meaning that the current found substring does NOT start at the beginning of the string, ie there DOES exist a substring before it), the algorithm then checks if that previous substring is, itself, segmentable (by checking the cached/memoized value of dp[checkLen])
 
         */
 

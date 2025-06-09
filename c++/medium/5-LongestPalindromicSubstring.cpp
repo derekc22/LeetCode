@@ -70,9 +70,6 @@ public:
             int iEven = q;
             int jEven = q+1;
 
-            cout << "___________________" << endl;
-            cout << "primary" << endl;
-
             while ( flag ) {    
 
                 flag = false;
@@ -80,8 +77,7 @@ public:
                 if ( iOdd >= 0 && jOdd < s.length() ){
                     char slOdd = s[iOdd];
                     char srOdd = s[jOdd];
-                    // cout << "odd: " << iOdd << ", " << jOdd << endl;
-                    // cout << slOdd << ", " << srOdd << endl;
+
                     if (slOdd == srOdd){
                         flag = true;
                         nOdd+=2;
@@ -93,18 +89,14 @@ public:
                 if ( iEven >= 0 && jEven < s.length() ){
                     char slEven = s[iEven];
                     char srEven = s[jEven];
-                    cout << "even: " << iEven << ", " << jEven << endl;
-                    cout << slEven << ", " << srEven << endl;
+
                     if (slEven == srEven){
                         flag = true;
                         nEven+=2;
                         iEven--;
                         jEven++;
-                        cout << "nEven: " << nEven << endl;
                     } 
                 }
-                
-
             }
         
             int longer = std::max(nOdd, nEven);
@@ -115,10 +107,8 @@ public:
             }
         }
 
-        cout << pI << ", " << pJ << endl;
         palindrome.clear();
         for ( int r=pI+1; r<=pJ-1; r++ ){
-            cout << "yo" << endl;
             palindrome.push_back(s[r]);
         }
         return palindrome;
