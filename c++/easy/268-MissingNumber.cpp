@@ -10,6 +10,7 @@ public:
             This one's pretty easy and self-explanatory
             Time Complexity: O(n)
             Space Complexity: O(1)
+            Use the equation for the sum of natural numbers from 0 to n instead of a for loop to calculate trueSum
         */
 
         int n = nums.size();
@@ -21,9 +22,7 @@ public:
             sum += num;
         }
 
-        for (int i=0; i<=n; i++){
-            trueSum += i;
-        }
+        int trueSum = n * (n + 1) / 2;
 
         missingNum = trueSum - sum;
         return missingNum;
