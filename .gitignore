@@ -2,3 +2,4 @@
 /.idea
 .venv
 ./c++/build/
+.vscode/*

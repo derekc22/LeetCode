@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Anysphere Dark Theme",
+    "workbench.colorTheme": "Darcula Pycharm with Light GUI",
     "files.associations": {
         "iosfwd": "cpp",
         "vector": "cpp",

@@ -46,6 +46,22 @@ public:
 
 
 
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+
+        int leftPtr
+
+
+
+
+    }
+};
+
+
+
 int main(){
     vector<int> arr = {3, 3};
     int target = 6;
