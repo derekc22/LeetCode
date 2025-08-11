@@ -10,7 +10,14 @@ class UndirectedUnweightedGraph {
         int numNodes;
         vector< unordered_set<int> > adj;
 
-        bool validateInput(int node, const vector<int> &neighbors){
+        void validateNode(int node){
+            if (node > numNodes-1 || node < 0){
+                std::cerr << "ERROR: Node " << std::to_string(node) << " is out of range." << std::endl;
+                exit(EXIT_FAILURE);
+            } 
+        }
+
+        void validateNeighbor(int node, const vector<int> &neighbors){
             for (const auto &neighbor : neighbors){
                 if (neighbor > numNodes-1 || neighbor < 0){
                     std::cerr << "ERROR: Neighbor " << std::to_string(neighbor) << " is out of range." << std::endl;
@@ -44,7 +51,7 @@ class UndirectedUnweightedGraph {
         UndirectedUnweightedGraph(int numNodes) : numNodes(numNodes), adj(numNodes) {}
 
         void addEdges(int node, const vector<int> &neighbors){
-            validateInput(node, neighbors);
+            validateNode(node); validateNeighbor(node, neighbors);
             addAllToAdj(node, neighbors);
             for (int neighbor : neighbors){
                 addToAdj(neighbor, node);
@@ -52,13 +59,21 @@ class UndirectedUnweightedGraph {
         }
 
         void removeEdges(int node, const vector<int> &neighbors){
-            validateInput(node, neighbors);
+            validateNode(node); validateNeighbor(node, neighbors);
             removeAllFromAdj(node, neighbors);
             for (int neighbor : neighbors){
                 removeFromAdj(neighbor, node);
             }
         }
 
+        int degree(int node){
+            return adj[node].size();
+        }
+
+        bool hasEdge(int source, int dest){
+            validateNode(source); validateNode(dest);
+            return static_cast<bool>(adj[source].count(dest));
+        }
 
         void printGraph(){
             int n = 0;
@@ -82,14 +97,13 @@ int main(){
     UndirectedUnweightedGraph graph(numNodes);
 
     graph.addEdges(0, vector<int>{1, 2, 3});
-
     graph.addEdges(1, vector<int>{0, 2, 3});
-
     graph.addEdges(2, vector<int>{0, 1, 3});
-
     graph.removeEdges(1, vector<int>{2, 3});
 
     graph.printGraph();
+    cout << std::boolalpha << graph.hasEdge(0, 2) << endl;
+
 
     return 0;
 }

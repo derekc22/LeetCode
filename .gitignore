@@ -3,3 +3,4 @@
 .venv
 ./c++/build/
 .vscode/*
+./dsa/build/*
