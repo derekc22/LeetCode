@@ -3,12 +3,18 @@ import math
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        # Ensure nums1 is the smaller array
+        
+        """
+        https://www.youtube.com/watch?v=LPFhl65R7ww
+        https://chatgpt.com/share/6896ea7d-e19c-8000-bbc8-9daf04040b37
+        """
+        
+        # Ensure numsx is the smaller array
         numsx, numsy = (nums1, nums2) if len(nums1) < len(nums2) else (nums2, nums1)
 
         Nx, Ny = len(numsx), len(numsy)
         N = Nx + Ny
-        N_half = (N + 1) // 2  # left side will have N_half elements for both even and odd
+        N_half = (N + 1) // 2  # left side will have N_half elements if N is even and N_half+1 elements if N is odd
 
         start, end = 0, Nx  # search on counts of elements taken from numsx
         while start <= end:

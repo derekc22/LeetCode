@@ -39,7 +39,6 @@ public:
 
             if (leftChar == rightChar){
                 left++;
-                right--;
             } else {
                 isPal = false;
             }

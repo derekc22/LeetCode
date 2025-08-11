@@ -1,9 +1,7 @@
 #include <iostream>
 #include <string>
 
-
-using std::string;
-using std::cout, std::endl;
+using std::string, std::cout, std::endl;
 
 class Solution {
 public:
@@ -72,3 +70,20 @@ public:
 
 
 
+
+int main(){
+
+    Solution sol;
+
+    string ss[] = {"traxradarblin", "zupmadamdeifiedlox", "grindreferrotorsap", 
+        "noobnooncivicdrop", "fleekpeepdeedbang", "laxstatsrevivertru", 
+        "moklevelmadamspur", "vexttenetnoonplex", "glarddeedpeepmadamtox", 
+        "zortredderrotorglim", "braxwowcivicstatslin", "jupdeifiedmoxklem", 
+        "vulkreviverreferdeedquab", "nockmadamwowzonk", "cleepeepcivicnoontrak"};
+    for (string s : ss){
+        int npal = sol.countSubstrings(s);
+        cout << "number of palindromes " << npal << endl;
+    }
+
+    return 0;
+}

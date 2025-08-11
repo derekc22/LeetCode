@@ -7,115 +7,115 @@ using std::vector;
 using std::cout; using std::endl;
 
 
-class Solution {
-public:
-    int longestConsecutive(vector<int>& nums) {
+// class Solution {
+// public:
+//     int longestConsecutive(vector<int>& nums) {
 
-        /**
-            My original attempt at '128-LongestConsecutiveSequence'
-            Uses a recursive approach that is more complex, less efficient, and more fragile than the non-recursive solution at the bottom of this file
-            Do not use this. It is simply left here for future reference
-        */
+//         /**
+//             My original attempt at '128-LongestConsecutiveSequence'
+//             Uses a recursive approach that is more complex, less efficient, and more fragile than the non-recursive solution at the bottom of this file
+//             Do not use this. It is simply left here for future reference
+//         */
 
-        std::map< int, vector<int> > numMap;
+//         std::map< int, vector<int> > numMap;
 
-        for (const auto& num : nums){
-            vector<int> surrounding = {num-1, num+1};
+//         for (const auto& num : nums){
+//             vector<int> surrounding = {num-1, num+1};
 
-            numMap[num] = surrounding;
-        }
+//             numMap[num] = surrounding;
+//         }
 
-        int longestN;
+//         int longestN;
 
-        int n;
-        n = (nums.size() > 0) ? 1 : 0;
-        longestN = n;
-
-        
-        for (int elem : nums){
-            vector<int> list = numMap[elem];
-            checkSurrounding(elem, list, numMap, n);
-
-            if (n > longestN){
-                longestN = n;
-            }
-            n = 1;
-        }
-
-
-        return longestN;
-        
-    }
-
-
-    void checkSurrounding(int key, vector<int> surrounding, std::map<int, vector<int>>& numMap, int& n){
-        numMap.erase(key);
-        for (auto& surround : surrounding){
-            if (numMap.find(surround) != numMap.end()){
-                n++;
-                checkSurrounding(surround, numMap[surround], numMap, n);
-            }
-        }
-        
-    }
-
-};
-
-
-
-class Solution {
-public:
-    int longestConsecutive(vector<int>& nums) {
-
-        /**
-            This is the exact same solution as the one above, but using an unordered_set instead of a map
-            It is more efficient than the previous solution as an unordered_set has O(1) average time complexity for lookups, while a map has O(log n) average time complexity
-            However, it still uses the same recursive approach as above, which is more complex, less efficient, and more fragile than the non-recursive solution below
-            Do not use this. It is simply left here for future reference
-            Note that this solution does not require the set to be sorted, so we use an unordered_set instead of a set as it is more efficient (O(1) average time complexity for lookups in an unordered_set compared to O(log n) for a set)
-         */
-
-        std::unordered_set<int> numSet;
-
-        for (const auto& num : nums){
-            numSet.insert(num);
-        }
-
-        int longestN;
-
-        int n;
-        n = (nums.size() > 0) ? 1 : 0;
-        longestN = n;
+//         int n;
+//         n = (nums.size() > 0) ? 1 : 0;
+//         longestN = n;
 
         
-        for (int elem : numSet){
-            vector<int> list = {elem-1, elem+1};
-            checkSurrounding(elem, list, numSet, n);
+//         for (int elem : nums){
+//             vector<int> list = numMap[elem];
+//             checkSurrounding(elem, list, numMap, n);
 
-            if (n > longestN){
-                longestN = n;
+//             if (n > longestN){
+//                 longestN = n;
+//             }
+//             n = 1;
+//         }
 
-            }
-            n = 1;
-        }
 
-        return longestN;
+//         return longestN;
         
-    }
+//     }
 
-    void checkSurrounding(int key, vector<int>& surrounding, std::unordered_set<int>& numSet, int& n){
-        numSet.erase(key);
-        for (auto& surround : surrounding){
-            if (numSet.find(surround) != numSet.end()){
-                n++;
-                vector<int> newList = {surround-1, surround+1};
-                checkSurrounding(surround, newList, numSet, n);
-            }
-        }
+
+//     void checkSurrounding(int key, vector<int> surrounding, std::map<int, vector<int>>& numMap, int& n){
+//         numMap.erase(key);
+//         for (auto& surround : surrounding){
+//             if (numMap.find(surround) != numMap.end()){
+//                 n++;
+//                 checkSurrounding(surround, numMap[surround], numMap, n);
+//             }
+//         }
         
-    }
+//     }
 
-};
+// };
+
+
+
+// class Solution {
+// public:
+//     int longestConsecutive(vector<int>& nums) {
+
+//         /**
+//             This is the exact same solution as the one above, but using an unordered_set instead of a map
+//             It is more efficient than the previous solution as an unordered_set has O(1) average time complexity for lookups, while a map has O(log n) average time complexity
+//             However, it still uses the same recursive approach as above, which is more complex, less efficient, and more fragile than the non-recursive solution below
+//             Do not use this. It is simply left here for future reference
+//             Note that this solution does not require the set to be sorted, so we use an unordered_set instead of a set as it is more efficient (O(1) average time complexity for lookups in an unordered_set compared to O(log n) for a set)
+//          */
+
+//         std::unordered_set<int> numSet;
+
+//         for (const auto& num : nums){
+//             numSet.insert(num);
+//         }
+
+//         int longestN;
+
+//         int n;
+//         n = (nums.size() > 0) ? 1 : 0;
+//         longestN = n;
+
+        
+//         for (int elem : numSet){
+//             vector<int> list = {elem-1, elem+1};
+//             checkSurrounding(elem, list, numSet, n);
+
+//             if (n > longestN){
+//                 longestN = n;
+
+//             }
+//             n = 1;
+//         }
+
+//         return longestN;
+        
+//     }
+
+//     void checkSurrounding(int key, vector<int>& surrounding, std::unordered_set<int>& numSet, int& n){
+//         numSet.erase(key);
+//         for (auto& surround : surrounding){
+//             if (numSet.find(surround) != numSet.end()){
+//                 n++;
+//                 vector<int> newList = {surround-1, surround+1};
+//                 checkSurrounding(surround, newList, numSet, n);
+//             }
+//         }
+        
+//     }
+
+// };
 
 
 
