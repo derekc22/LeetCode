@@ -2,25 +2,19 @@
 #include <vector>
 #include <unordered_set>
 #include "../data-structures/graph.h"
-#include <tuple>
-#include <algorithm>
-#include <deque>
 
-using std::cout, std::endl, std::vector, std::unordered_set, std::tuple, std::find, std::deque;
+using std::cout, std::endl, std::vector, std::unordered_set;
 
 
 vector<int> dfs(UndirectedUnweightedGraph &G, int source){
 
-    deque<int> queue;
     vector<int> edgeTo(G.numNodes, -1);
     vector<int> marked(G.numNodes);
-    marked[source] = 1;
 
-    unordered_set<int> currNeighbors;
+    std::function<void(int)> traverse;
 
-    std::function<int(int)> traverse;
-
-    traverse = [&traverse, &G, &marked, &edgeTo](int curr) {
+    traverse = [&](int curr) {
+        cout << curr << endl;
         marked[curr] = 1;
         for (int neighbor : G.getNeighbors(curr)){
             if (!marked[neighbor]){
@@ -28,7 +22,6 @@ vector<int> dfs(UndirectedUnweightedGraph &G, int source){
                 traverse(neighbor);
             }
         }
-        return 0;
     };
 
     traverse(source);
@@ -38,14 +31,14 @@ vector<int> dfs(UndirectedUnweightedGraph &G, int source){
 
 int main(){
     UndirectedUnweightedGraph G(9);
-    G.addEdges(0, vector<int>{1});
-    G.addEdges(1, vector<int>{0, 2, 4});
-    G.addEdges(2, vector<int>{1, 5});
-    G.addEdges(3, vector<int>{4});
-    G.addEdges(4, vector<int>{1, 5});
-    G.addEdges(5, vector<int>{2, 4, 6, 8});
-    G.addEdges(6, vector<int>{5, 7});
-    G.addEdges(7, vector<int>{6});
+    G.addEdges(0, unordered_set<int>{1});
+    G.addEdges(1, unordered_set<int>{0, 2, 4});
+    G.addEdges(2, unordered_set<int>{1, 5});
+    G.addEdges(3, unordered_set<int>{4});
+    G.addEdges(4, unordered_set<int>{1, 5});
+    G.addEdges(5, unordered_set<int>{2, 4, 6, 8});
+    G.addEdges(6, unordered_set<int>{5, 7});
+    G.addEdges(7, unordered_set<int>{6});
     G.printGraph();
 
     auto edgeTo = dfs(G, 0);

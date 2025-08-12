@@ -80,7 +80,7 @@ public:
 
 
 
-
+/*
 #include <iostream>
 #include <vector>
 #include <string>
@@ -91,11 +91,11 @@ class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
 
-        /**
+        
             In the first solution (above), we simply replace found words with an empty string until no more words can be found
             In the second solution (above), we fill a boolean array with 1s for the positions of the found words and then check if the sum of the array equals the length of the string
             Solution 1 fails for Test 4, where the string "cars" can be segmented into "ca" and "rs", as the greedy approach does not consider this combination as it finds "car" first and immediately removes it, leaving "s" which cannot be segmented further
-            This approach is "greedy" as it trie to find and remove words from the string as quickly as possible without considering all possible combinations
+            This approach is "greedy" as it tries to find and remove words from the string as quickly as possible without considering all possible combinations
             Solution 2 fails for Test 5, where the string "catsandog" can NOT be segmented using the words in the dictionary, as even though the string "catsandog" contains the words "cats", "dog", "sand", "and", "cat", the string cannot be segmented (mutually exclusively) into these words
             This approach fails to identify this because, unlike the first solution which removes words from the string, ensuring that only mutually exclusive segments are considered, this approach leaves the string intact, making it possible to count segments that are not mutually exclusive
 
@@ -129,7 +129,7 @@ public:
             Note that this is the exact logic that the video uses an extra element in the dp array to handle
             Anyway, if, alternatively, the index of the previous substring is greater than or equal to 0 (meaning that the current found substring does NOT start at the beginning of the string, ie there DOES exist a substring before it), the algorithm then checks if that previous substring is, itself, segmentable (by checking the cached/memoized value of dp[checkLen])
 
-        */
+        
 
 
         vector<bool> dp(s.length());
@@ -147,9 +147,9 @@ public:
         int checkLen;
 
         string c;
+        string currSubstr;
 
         for (int i=0; i < s.length(); i++){
-            string currSubstr;
             
             string currRange = s.substr(0, i+1);
             auto rit = currRange.rbegin();
@@ -174,7 +174,63 @@ public:
         return dp.back();
     }
 };
+*/
 
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <unordered_set>
+
+
+using std::string, std::vector, std::cout, std::endl, std::unordered_set, std::max;
+
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+    
+        /** 
+            Although solution 3 works, it is non-standard and lowkey confusing upon returning to it a month later
+            The use of reverse iterators is pretty cumbersome in particular
+            Here is a more standard dp solution that aligns more closely with that show in the video (https://www.youtube.com/watch?v=hK6Git1o42c)
+            It uses a dp array of size s.length() + 1
+        */
+
+
+        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+        int strLen = static_cast<int>(s.size());
+        int maxSubstrLen = 0;
+        for (const auto& w : dict) {
+            maxSubstrLen = max(maxSubstrLen, static_cast<int>(w.size()));
+        }
+
+        // dp[i] == true means s[0..i-1] can be segmented
+        vector<bool> dp(strLen + 1, false);
+        dp[0] = true; // We define the base case, dp[0], to mean that the empty string can be segmented
+
+        for (int rightBoundary = 1; rightBoundary <= strLen; rightBoundary++) {
+            // Only need to look back up to maxSubstrLen characters
+            // We don't check the rightBoundary itself (since it is a boundary), only the substrings in the range s[leftMin, rightBoundary)
+            int leftMin = max(0, rightBoundary - maxSubstrLen);
+            for (int i = rightBoundary - 1; i >= leftMin; i--) {
+                if (!dp[i]) continue;
+                // search the substring in the range s[i, rightBoundary-1] for dict matches
+                if (dict.find(s.substr(i, rightBoundary - i)) != dict.end()) {
+                    // If we reach this point, this means that
+                    // a) the subsctring in the range s[i, rightBoundary-1] exists in the dict...
+                    // b) AND dp[i] == true, AKA the substring in the range s[0, i-1] (AKA the immediately preceeding substring) ALSO exists in the dict
+                    // These two facts combined mean that the two (contiguous) substrings in the ranges s[0, i-1] and s[i, rightBoundary-1] BOTH exist in the dict. Thus, the substring in the range s[0, rightBoundary-1] IS segementable
+                    dp[rightBoundary] = true;
+                    // Thus, we mark dp[rightBoundary] = true to signify that s[0..rightBoundary-1] can be segmented (as per its definition above)
+                    
+                    // Note: I use the terminology 'substring in the range' very particularly here. For example, s[0, i-1] means 'the substring of s from index=0 inclusive to index=i-1 inclusive'
+                    break;
+                }
+            }
+        }
+        return dp[strLen];
+}
 
 
 
@@ -190,12 +246,12 @@ int main(){
     vector<string> wordDict;
 
     // Test 1 (answer = true)
-    s = "bb";
-    wordDict = {"a","b","bbb","bbbb"};
+    // s = "bb";
+    // wordDict = {"a","b","bbb","bbbb"};
 
     // Test 2 (answer = true)
-    // s = "applepenapple";
-    // wordDict = {"apple","pen"};
+    s = "applepenapple";
+    wordDict = {"apple","pen"};
 
     // // Test 3 (answer = true)
     // s = "leetcode";

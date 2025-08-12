@@ -16,7 +16,7 @@ class UndirectedUnweightedGraph {
             } 
         }
 
-        void validateNeighbor(int node, const vector<int> &neighbors){
+        void validateNeighbor(int node, const unordered_set<int> &neighbors){
             for (const auto &neighbor : neighbors){
                 if (neighbor > numNodes-1 || neighbor < 0){
                     std::cerr << "ERROR: Neighbor " << std::to_string(neighbor) << " is out of range." << std::endl;
@@ -28,7 +28,7 @@ class UndirectedUnweightedGraph {
             }
         }
 
-        void addAllToAdj(int node, const vector<int> &neighbors){
+        void addAllToAdj(int node, const unordered_set<int> &neighbors){
             adj[node].insert(neighbors.begin(), neighbors.end());
         }
 
@@ -36,7 +36,7 @@ class UndirectedUnweightedGraph {
             adj[node].insert(neighbor);
         }
 
-        void removeAllFromAdj(int node, const vector<int> &neighbors){
+        void removeAllFromAdj(int node, const unordered_set<int> &neighbors){
             for (int neighbor : neighbors){
                 removeFromAdj(node, neighbor);
             }
@@ -50,7 +50,7 @@ class UndirectedUnweightedGraph {
         int numNodes;
         UndirectedUnweightedGraph(int numNodes) : adj(numNodes), numNodes(numNodes){}
 
-        void addEdges(int node, const vector<int> &neighbors){
+        void addEdges(int node, const unordered_set<int> &neighbors){
             validateNode(node); validateNeighbor(node, neighbors);
             addAllToAdj(node, neighbors);
             for (int neighbor : neighbors){
@@ -58,7 +58,7 @@ class UndirectedUnweightedGraph {
             }
         }
 
-        void removeEdges(int node, const vector<int> &neighbors){
+        void removeEdges(int node, const unordered_set<int> &neighbors){
             validateNode(node); validateNeighbor(node, neighbors);
             removeAllFromAdj(node, neighbors);
             for (int neighbor : neighbors){
