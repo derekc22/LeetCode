@@ -15,11 +15,11 @@ public:
             Here, we attempt to find two heights in the array that, when used to calculate the area of a container, yield some maximum value
             
             Note that the 'certain condition' cannot be arbitrary
-            For example, in TwoSum, the condition is that the sum of two numbers equals a target value - which is arbitrary
+            For example, in TwoSum, the condition is that the sum of two numbers equals an arbitrary target value - which is arbitrary
             Due to the arbitrary nature of the target value, the two-pointer approach is not applicable as, at each step, we do not know which pointer to move
             In ContainerWithMostWater, however, the condition is that the area of the container is maximized - this is not arbitrary
             Thus, at each step, we know that to maximize the area, we should always move the pointer pointing to the shorter height
-            Now, if the TwoSum problem were modified such that we were working with a sorted array, then the two-pointer approach would be applicable since we would know which pointer to move based on whether the current sum was less than or greater than the target value
+            Now, if the TwoSum problem were modified such that we were working with a sorted array, then the two-pointer approach would be applicable since we would deterministically know which pointer to move based on whether the current sum was less than or greater than the target value
          */
 
         int left = 0;
@@ -35,6 +35,11 @@ public:
             heightLeft = height[left];
             heightRight = height[right];
             
+            // The minimum of the two heights determines the height
+            // This is a crucial insight and is the reason why we move the pointer pointing to the shorter height in order to maximize area
+            // At each step, we have two choices to make - move the left or the right pointers
+            // Regardless of which we choose, we will always lose 1 unit in width
+            // Thus, all we can control is min_h. Thus, we move the pointer pointing to the shorter height in an attempt to maximize min_h
             min_h = std::min(heightLeft, heightRight);
             area = (right-left) * min_h;
             

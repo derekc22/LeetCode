@@ -15,40 +15,40 @@ struct ListNode {
  * };
  */
 
-// class Solution {
-// public:
-//     bool hasCycle(ListNode* head) {
+/*
+class Solution {
+public:
+    bool hasCycle(ListNode* head) {
+        /**
+            This solution uses a set to store the addresses of the nodes in the linked list that have already been visited
+            At each node, we check the set to see if the address of the current node is in the set
+            If it is, this means that we have already visited this node, and therefore there is a cycle in the linked list
+            If it is not, we add the address of the current node to the set and continue to the next node
+            If we reach the end of the linked list without finding a cycle, the 'cycle' boolean will remain false and we return false
+            Time complexity: O(n), Space complexity: O(n)
 
-//         /**
-//             This solution uses a set to store the addresses of the nodes in the linked list that have already been visited
-//             At each node, we check the set to see if the address of the current node is in the set
-//             If it is, this means that we have already visited this node, and therefore there is a cycle in the linked list
-//             If it is not, we add the address of the current node to the set and continue to the next node
-//             If we reach the end of the linked list without finding a cycle, the 'cycle' boolean will remain false and we return false
-//             Time complexity: O(n), Space complexity: O(n)
+            This is good, but there is a better solution with Time complexity: O(n) and Space complexity: O(1)
+            This solution uses fast and slow pointers to detect a cycle in the linked list
+        *
 
-//             This is good, but there is a better solution with Time complexity: O(n) and Space complexity: O(1)
-//             This solution uses fast and slow pointers to detect a cycle in the linked list
-//          */
+        std::set<ListNode*> addressSet;
 
-//         std::set<ListNode*> addressSet;
+        bool cycle =  false;
+        ListNode* currNodePtr = head;
 
-//         bool cycle =  false;
-//         ListNode* currNodePtr = head;
-
-//         while (!cycle && currNodePtr!=nullptr){
-//             if ( addressSet.find(currNodePtr) != addressSet.end() ){
-//                 cycle = true;
-//             } else {
-//                 addressSet.insert(currNodePtr);
-//                 currNodePtr = currNodePtr -> next;
-//             }
-//         }   
+        while (!cycle && currNodePtr!=nullptr){
+            if ( addressSet.find(currNodePtr) != addressSet.end() ){
+                cycle = true;
+            } else {
+                addressSet.insert(currNodePtr);
+                currNodePtr = currNodePtr -> next;
+            }
+        }   
     
-//         return cycle;
-//     }
-// };
-
+        return cycle;
+    }
+};
+ */
 
 class Solution {
 public:

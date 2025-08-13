@@ -14,15 +14,14 @@ public:
         return result;
     }
     
+/*
     bool isPalindrome(string s) {
-
-        /** 
-         * This algorithm checks if a given string is a palindrome
+         /**
+         * This was my initial attempt at an algorithm that checks if a given string is a palindrome
          * This is a classic two-pointer problem as the structure of a palindrome is such that the first and last characters must match, no matter how many characters are in between
          * Thus, if any pair of characters at the two pointers do not match, the string is automatically not a palindrome 
-        */
+        *
     
-
         s = formatString(s);
         cout << s << endl;
 
@@ -44,14 +43,47 @@ public:
             }
         }
         return isPal;   
+    } 
+*/
+
+
+    bool isPalindrome(string s) {
+
+        /**
+            Uses a two-pointer approach
+
+            This was my second attempt at 125-ValidPalindrome (without peeking). In my opinion, this solution is much cleaner (at least syntax-wise)
+
+            Time Complexity: O(n)
+            We iterate through half of the string
+            
+            Space Complexity: O(1)
+            If you ignore the creation of the formatted string, we only create two pointers: O(1)
+            If you include the creation of the formatted string, it is clearly O(n)
+         */
+
+        string formatted = formatString(s);
+        auto left = formatted.begin();
+        auto right = formatted.end()-1;
+
+        while (left <= right){
+            if (*left != *right){
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
     }
+
 };
 
 
 int main(){
 
     string s;
-    s = "aabca";
+    s = "A man, a plan, a canal: Panama";
 
     Solution sol;
     cout << sol.isPalindrome(s) << endl;

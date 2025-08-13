@@ -9,7 +9,8 @@ public:
     bool containsDuplicate(vector<int>& nums) {
 
         /**
-            Uses a hashset approach
+            Uses a hashing (hash set) approach
+
             Time Complexity: O(n) in the worst case 
             We iterate through all nums, checking the cache at each step
             The worst case occurs when there are no duplicates
