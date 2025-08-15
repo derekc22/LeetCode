@@ -11,13 +11,13 @@ public:
         /**
             Uses a hashing (hash set) approach
 
-            Time Complexity: O(n) in the worst case 
-            We iterate through all nums, checking the cache at each step
+            Time Complexity: O(n)
             The worst case occurs when there are no duplicates
+            In this worst case, we iterate through ALL nums until we reach the end (as there is no early return)
 
             Space Complexity: O(n) in the worst case
-            We iterate through all nums, adding to the cache at each step
             The worst case occurs when there are no duplicates
+            In this worst case, all n non-duplicates are added to the cache (as there is no early return)
          */
 
         unordered_set<int> cache;

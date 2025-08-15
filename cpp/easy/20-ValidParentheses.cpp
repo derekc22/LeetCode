@@ -127,19 +127,56 @@ public:
     bool isValid(string s) {
 
         /**
+            Uses a stack approach
+
+            In this solution, we iterate through all brackets in the string
+            If the bracket is an opening bracket, we add it to our stack (LIFO) and skip to the next loop iteration
+            If the bracket is a  closing bracket, we check to see if the LAST opening bracket that was added to the stack matches this closing bracket
+            
+            If it does not match, we return false as, in order for a string of parentheses to be valid, the LAST bracket that was opened must be closed before any other brackets can be closed
+            ()[] and ([]) -> VALID
+            ([)] -> INVALID
+            This is the core reason that we use a stack - it keeps the LAST element added on top
+
+            If it does match, we remove that LAST bracket from the stack, as we can be assured that it was successfully closed
+
+            Note, however, that before we check to see if a closing bracket matches the last opening bracket, we must first check to see if the stack is empty
+            This serves 2 purposes: 
+            (1) stops us from attempting to access an empty stack
+            (2) more importantly, it tells us that we are currently handling a closing bracket, despite the fact that there are no opening brackets in the stack
+            Thus, it is clear that our current closing bracket cannot be paired with any opening prior opening brackets. Thus, we must return false
+
+            When we finally reach the end of the string, we make one final check
+            If the stack is NOT empty, this means that there were some opening brackets that were never closed, as would be the case here, (([]
+            Thus, we return false in this case
+
+            Otherwise, if the stack is empty, we know that ALL of the opening brackets were successfully closed, so we return true
+            Thus, our algorithm considers all three possible invalid cases:
+            (a) a closing bracket has no accompanying opening bracket -> [])
+            (b) an opening bracket is closed by the wrong type of closing bracket -> ([)]
+            (c) an opening bracket has no accompanying closing bracket -> ([]
+
+            Note: if s has an add number of parens, by definition, it cannot have a closing bracket for each opening bracket
+            Thus, we check this at the start and return early if true
+
+            Time Complexity: O(n)
+            We iterate through all n parenthesis in s
+
+            Space Complexity: O(n) in the worst case
+            The worst case occurs when all parenthesis are opening
+            In this worst case, all n opening parenthesis get added to the stack
 
          */
 
         size_t size = s.size();
         if (size % 2 != 0) return false;
 
+        stack<char> stack;
         unordered_map<char, char> pairs = {
             {'(', ')'},
             {'{', '}'},
             {'[', ']'},
         };
-        stack<char> stack;
-
 
         for (char c : s){
 
@@ -147,15 +184,13 @@ public:
                 stack.push(c);
                 continue;
             }
-            if (c != pairs[stack.top()]){
+            if (stack.empty() || c != pairs[stack.top()]){
                 return false;
             } 
             stack.pop();
         }
-
-        return true;
+        return stack.size() == 0;
     }  
-
 };
 
 int main(){
@@ -164,7 +199,7 @@ int main(){
     Solution sol;
 
     // Example 1
-    // string s = "([{[]}]{})"; // Answer is true
+    string s = "([{[]}]{})"; // Answer is true
 
     // Example 2
     // string s = "([{}][])"; // Answer is true
@@ -173,7 +208,7 @@ int main(){
     // string s = "()[]{}"; // Answer is true
 
     // Example 4
-    string s = "()[](]"; // Answer is false
+    // string s = "()[](]"; // Answer is false
 
     cout << sol.isValid(s) << endl;
 

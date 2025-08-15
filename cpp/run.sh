@@ -1,7 +1,5 @@
 #!/bin/bash
 
-clear; clear;
-
 # Full file path as argument
 fpath=$1
 
@@ -16,6 +14,8 @@ fname=$(basename "$fpath" .cpp)
 
 # Build using make
 make file="$fpath"
+
+clear; clear;
 
 # Run the output
 ./build/"$fname"
