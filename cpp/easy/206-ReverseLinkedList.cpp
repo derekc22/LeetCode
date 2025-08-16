@@ -214,38 +214,74 @@ public:
         
         My first approach involved trying to do everything at once
         For each node, I tried to switch both the pointers:
-            next->next = curr;
-            curr->next = prev;
+            right->next = curr;
+            curr->next = left;
         This would be more complex to implement, so I settled for a simpler approach 
 
-        My new approach simply rewires the next pointer of the current node to point to the previous node, curr->next = prev;
-        This is in contrast to my initial approach, which simultaneously tried to rewire the next pointer of the next node to point to the current node, next->next = curr;
+        My new approach simply points the current node to the left node, curr->next = left;
+        This is in contrast to my initial approach, which simultaneously tried to point the right node to the current node and the current node to the left node
 
-        Before we do any rewiring, we begin by storing the current node and the next node in temp variables
-        - We store tempCurr = curr
+        To implement this, we use three pointers:
+        left - points to the left node
+        curr - points to the current node
+        right - points to the right node
 
-         A -> B -> C -> nullptr
+        Note: I initially named these pointers prev, curr, and next, respectively
+        However, I struggled to understand the logic with this naming scheme
+        After renaming them to left, curr, and right, I found it INSTANTLY easier to understand the logic
+        It was literally magical how much easier it was to understand the logic just by renaming the variables - I'm not even exaggerating
+        This goes to show how important variable naming is in programming - good variable names can make code much easier to understand
+        Thus, whenever solving linked list problems, use left, curr, and right as your pointer variable names
 
+        In our main loop, we do the following:
+        1. Store the right node: right = curr->next;
+        We do this because we are about to rewire curr->next to point to the left node 
+        Thus, we must first store the original right node so we know which node to jump to in the next iteration
+
+        2. Point the current node to the left node: curr->next = left;
+        This is the core operation that reverses the linked list
+        By making the current node point to the left node, we are effectively reversing the direction of the link between these two nodes
+
+        3. Increment the left and curr pointers
+            left = curr;
+            curr = right;
+        This simply advances our pointers, moving us down the linked list
+        We continue this process until curr is nullptr, meaning that the node to the left of curr was the final node in the original linked list
+        Thus, at this point, we can simply return left, as the final node in a linked list is always the head of the reversed linked list
+
+        Some housekeeping notes:
+        We initialize left to nullptr, as the curr = head will need to point to the nullptr in the first iteration
+        Moreover, if the linked list is empty (ie, curr = head, where head = nullptr), the while loop is never entered, and we simply return left.
+        Thus, left better be equal to nullptr at the start for this edge case to be handled correctly
+
+        And that's it! Much simpler than the recursive approach (at least once the variable names were changed)
+        
+
+        Time Complexity: O(n)
+        We iterate through all n nodes
+
+        Space Complexity: O(1)
+        We only use a constant amount of extra space for the three pointers
+        Notice how this is better than the recursive approach, which has O(n) space complexity due to the call stack
 
      */
 
-        ListNode* prev = nullptr;       
+        ListNode* left = nullptr;       
         ListNode* curr = head;          
-        ListNode* tempCurr = curr;
-        ListNode* tempNext;
+        ListNode* right;
 
         while (curr != nullptr){
 
-            tempCurr = curr;
-            tempNext = curr->next;
+            right = curr->next; // store the right node
 
-            curr->next = prev;
+            curr->next = left; // core operation - point curr to left
 
-            curr = tempNext;
-            prev = tempCurr;
+            // increment pointers
+            left = curr;
+            curr = right;
         }
 
-        return tempCurr;
+        return left;
     }
 };
 

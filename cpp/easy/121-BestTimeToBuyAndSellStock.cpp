@@ -86,7 +86,7 @@ public:
     int maxProfit(const std::vector<int>& prices) {
         
         /**
-            Uses a ? approach
+            Uses an iterative approach
 
             Although the above two-pointer approach does work, this is conceptually simpler despite using the same core mechanism
             That core mechanism is that we always store and use the best found 'buy' price
